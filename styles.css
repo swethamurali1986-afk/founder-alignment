@@ -179,6 +179,17 @@ textarea {
   padding: 11px 12px;
 }
 
+input[type="checkbox"],
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  margin: 0;
+  padding: 0;
+  flex: 0 0 18px;
+  accent-color: var(--accent);
+}
+
 textarea {
   resize: vertical;
 }
@@ -286,6 +297,8 @@ legend {
   gap: 10px;
   align-items: center;
   background: #fbfcfd;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .two-col,
@@ -366,6 +379,12 @@ legend {
   border-radius: 8px;
   padding: 9px;
   background: white;
+  min-width: 0;
+}
+
+.role-options label span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .total-pill {
@@ -521,6 +540,20 @@ legend {
   .alignment-grid,
   .readiness-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .check-grid,
+  .role-options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .check-grid label,
+  .role-options label {
+    width: 100%;
+    min-height: 48px;
+    justify-content: flex-start;
   }
 }
 
