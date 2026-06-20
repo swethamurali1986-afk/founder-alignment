@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Founder Alignment Canvas</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Founder Alignment Canvas</p>
+        <h1>Before you register, align the hard decisions.</h1>
+      </div>
+      <div class="header-actions">
+        <button id="copyLinkBtn" class="icon-btn" title="Copy the shared team link" type="button">Copy team link</button>
+        <button id="refreshBtn" class="icon-btn" title="Load the latest founder responses" type="button">Refresh results</button>
+        <button id="printBtn" class="icon-btn" title="Print summary" type="button">Print</button>
+        <button id="exportBtn" type="button">Export JSON</button>
+        <label class="file-action">
+          Import JSON
+          <input id="importInput" type="file" accept="application/json" />
+        </label>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="Founder controls">
+        <section class="panel">
+          <h2>Team Setup</h2>
+          <div id="teamNames" class="team-names"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Person Filling This</h2>
+          <div class="founder-picker" role="radiogroup" aria-label="Founder">
+            <label><input type="radio" name="founder" value="F1" checked /> <span data-founder-label="F1">F1</span></label>
+            <label><input type="radio" name="founder" value="F2" /> <span data-founder-label="F2">F2</span></label>
+            <label><input type="radio" name="founder" value="F3" /> <span data-founder-label="F3">F3</span></label>
+            <label><input type="radio" name="founder" value="F4" /> <span data-founder-label="F4">F4</span></label>
+          </div>
+          <label class="field">
+            <span>Name</span>
+            <input id="founderName" type="text" placeholder="Founder name" />
+          </label>
+          <label class="field">
+            <span>Email</span>
+            <input id="founderEmail" type="email" placeholder="name@company.com" />
+          </label>
+          <p class="save-state" id="saveState">Connecting to shared workspace...</p>
+        </section>
+
+        <section class="panel compact">
+          <h2>Progress</h2>
+          <div class="progress-line"><span>Answered</span><strong id="progressText">0%</strong></div>
+          <div class="progress-track"><div id="progressBar"></div></div>
+        </section>
+      </aside>
+
+      <form id="canvasForm" class="canvas" autocomplete="on">
+        <section class="section-block">
+          <div class="section-heading">
+            <span>0</span>
+            <div>
+              <h2>Workshop Basics</h2>
+              <p>Capture the company, meeting, and incorporation decisions in one place.</p>
+            </div>
+          </div>
+          <div class="two-col">
+            <label class="field">
+              <span>Company name</span>
+              <input data-field="companyName" type="text" placeholder="Proposed company name" />
+            </label>
+            <label class="field">
+              <span>Workshop date</span>
+              <input data-field="workshopDate" type="date" />
+            </label>
+          </div>
+          <div id="registrationRules" class="two-col"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <span>A</span>
+            <div>
+              <h2>What Are We Building?</h2>
+              <p>Select one clear direction, then add short notes only where needed.</p>
+            </div>
+          </div>
+          <div id="buildingRules" class="two-col"></div>
+          <fieldset>
+            <legend>Primary goal - choose up to 2</legend>
+            <div id="primaryGoals" class="check-grid"></div>
+          </fieldset>
+          <label class="field">
+            <span>Notes</span>
+            <textarea data-field="buildingNotes" rows="3" placeholder="Short context, disagreements, or assumptions."></textarea>
+          </label>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <span>B</span>
+            <div>
+              <h2>Vision</h2>
+              <p>Align on the 3-year and 10-year destination before registering.</p>
+            </div>
+          </div>
+          <div id="visionRules" class="two-col"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <span>C</span>
+            <div>
+              <h2>Commitment</h2>
+              <p>Choose one full-time timing expectation and record weekly effort for each founder.</p>
+            </div>
+          </div>
+          <div id="commitmentMatrix" class="matrix-grid"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <span>D</span>
+            <div>
+              <h2>Roles</h2>
+              <p>Select one or more founders for each responsibility area.</p>
+            </div>
+          </div>
+          <div id="rolesList" class="function-grid"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <span>E</span>
+            <div>
+              <h2>Equal Equity & Investment</h2>
+              <p>Default assumption: 25% equity each and 25% investment each.</p>
+            </div>
+          </div>
+          <p class="assumption-pill">Default: 25% equity each and 25% investment each.</p>
+          <div id="equalOwnershipRules" class="two-col"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <span>F</span>
+            <div>
+              <h2>Funding & Salary</h2>
+              <p>Choose the funding path, personal investment, and salary expectations.</p>
+            </div>
+          </div>
+          <div id="fundingRules" class="two-col"></div>
+          <div id="investmentMatrix" class="matrix-grid"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <span>G</span>
+            <div>
+              <h2>Decision Making</h2>
+              <p>Define who can approve the decisions that create real consequences.</p>
+            </div>
+          </div>
+          <div id="decisionRules" class="two-col"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <span>H</span>
+            <div>
+              <h2>Difficult Scenarios</h2>
+              <p>Decide how the company responds when a founder leaves, stops contributing, or takes another job.</p>
+            </div>
+          </div>
+          <div id="scenarioRules" class="two-col"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <span>I</span>
+            <div>
+              <h2>Product Strategy</h2>
+              <p>Clarify whether you are building one product, many products, or a studio model.</p>
+            </div>
+          </div>
+          <div id="productRules" class="two-col"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <span>J</span>
+            <div>
+              <h2>Legal & Exit Basics</h2>
+              <p>Capture the founder agreement, IP, confidentiality, conflict, and exit terms.</p>
+            </div>
+          </div>
+          <div id="legalRules" class="two-col"></div>
+        </section>
+
+        <section class="section-block">
+          <div class="section-heading">
+            <span>A+</span>
+            <div>
+              <h2>Auto Alignment Score</h2>
+              <p>Calculated from how closely F1-F4 match across the canvas.</p>
+            </div>
+          </div>
+          <div class="score-hero">
+            <strong id="readinessTotal">0 / 100</strong>
+            <span id="readinessLabel">Waiting for more responses</span>
+          </div>
+          <div id="alignmentDetails" class="alignment-grid"></div>
+          <label class="field">
+            <span>Notes after discussion</span>
+            <textarea data-field="notes" rows="5" placeholder="Capture key disagreements, decisions, and follow-ups."></textarea>
+          </label>
+        </section>
+      </form>
+    </main>
+
+    <section class="summary" aria-label="Readiness guidance">
+      <h2>Registration Readiness</h2>
+      <div class="readiness-grid">
+        <p><strong>85-100</strong><span>Ready to incorporate</span></p>
+        <p><strong>70-84</strong><span>Resolve key disagreements first</span></p>
+        <p><strong>Below 70</strong><span>Do not register yet</span></p>
+      </div>
+    </section>
+
+    <script src="app.js"></script>
+  </body>
+</html>
